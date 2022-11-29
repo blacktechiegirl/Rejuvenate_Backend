@@ -2,7 +2,7 @@ import type { AWS } from '@serverless/typescript';
 import {createProduct, getAllProducts, getProductByCategory, getProductById , generateUploadURL } from '@functions/index';
 
 const serverlessConfiguration: AWS = {
-  service: 'rejuvenate backend',
+  service: 'rejuvenate-backend',
   frameworkVersion: '3',
   plugins: ['serverless-esbuild', 'serverless-offline', 'serverless-dynamodb-local'],
   custom:{
