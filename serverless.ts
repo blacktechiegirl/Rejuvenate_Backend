@@ -54,6 +54,7 @@ const serverlessConfiguration: AWS = {
             'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.productTable}',
             'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.productDetailsTable}',
             'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.reviewsTable}',
+            'arn:aws:s3:::rejuvenatebucket2022',
           ],
         }],
       },
