@@ -8,15 +8,10 @@ import { v4 } from "uuid";
 
 dotenv.config()
 
-const region = "us-east-1"
 const bucketName = "rejuvenatebucket2022"
-const accessKeyId = process.env.AWS_ACCESS_KEY_ID
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+
 
 const s3 = new S3({
-  region,
-  accessKeyId,
-  secretAccessKey,
   signatureVersion: 'v4'
 })
 
