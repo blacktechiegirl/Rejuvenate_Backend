@@ -4,7 +4,10 @@ import { formatJSONResponse } from "@libs/api-gateway";
 import { v4 } from "uuid";
 
 const bucketName = "rejuvenatebucket2022"
+const region = "us-east-1"
+
 const s3 = new S3({
+  region,
   signatureVersion: 'v4'
 })
 
