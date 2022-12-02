@@ -2,6 +2,8 @@ import middy from "@middy/core";
 import middyJsonBodyParser from "@middy/http-json-body-parser";
 import httpErrorHandler from "@middy/http-error-handler";
 import validator from "@middy/validator";
+import cors from '@middy/http-cors'
+
 
 const inputSchema = {
   type: "object",
@@ -33,12 +35,12 @@ const inputSchema = {
 };
 
 export const middyfy = (handler) => {
-  return middy(handler).use(middyJsonBodyParser()).use(httpErrorHandler())
+  return middy(handler).use(middyJsonBodyParser()).use(httpErrorHandler()).use(cors())
   
 };
 
 export const validmiddyfy = (handler) => {
-  return middy(handler).use(middyJsonBodyParser()).use(httpErrorHandler()).use(
+  return middy(handler).use(middyJsonBodyParser()).use(cors()).use(httpErrorHandler()).use(
     validator({
       inputSchema,
     })

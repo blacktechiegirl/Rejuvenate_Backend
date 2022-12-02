@@ -10,7 +10,8 @@ export const generateUploadURL = {
             http: {
                 method: 'get',
                 path: 's3url/{imagename}',
-                cors: true
+                cors: true,
+            
             },
         },
     ],
