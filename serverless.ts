@@ -1,5 +1,5 @@
 import type { AWS } from '@serverless/typescript';
-import {createProduct, getAllProducts, getProductByCategory, getProductById , generateUploadURL } from '@functions/index';
+import {createProduct, getAllProducts, getProductByCategory, getProductById , generateUploadURL, getAllCartItems, createCartItem, deleteCartItem,getAllWishlistItems, createWishlistItem, deleteWishlistItem } from '@functions/index';
 
 const serverlessConfiguration: AWS = {
   service: 'rejuvenate-backend',
@@ -61,7 +61,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: {createProduct, getAllProducts, getProductByCategory, getProductById , generateUploadURL },
+  functions: {createProduct, getAllProducts, getProductByCategory, getProductById , generateUploadURL,getAllCartItems, createCartItem, deleteCartItem,getAllWishlistItems, createWishlistItem, deleteWishlistItem  },
   package: { individually: true },
   resources: {
     Resources: {
@@ -113,6 +113,44 @@ const serverlessConfiguration: AWS = {
           }],
           KeySchema: [{
             AttributeName: "productId",
+            KeyType: "HASH"
+          }],
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1
+          },
+
+        }
+      },
+      CartTable: {
+        Type: "AWS::DynamoDB::Table",
+        Properties: {
+          TableName: "cart-table",
+          AttributeDefinitions: [{
+            AttributeName: "userId",
+            AttributeType: "S",
+          }],
+          KeySchema: [{
+            AttributeName: "userId",
+            KeyType: "HASH"
+          }],
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1
+          },
+
+        }
+      },
+      WishlistTable: {
+        Type: "AWS::DynamoDB::Table",
+        Properties: {
+          TableName: "wishlist-table",
+          AttributeDefinitions: [{
+            AttributeName: "userId",
+            AttributeType: "S",
+          }],
+          KeySchema: [{
+            AttributeName: "userId",
             KeyType: "HASH"
           }],
           ProvisionedThroughput: {
