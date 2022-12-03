@@ -9,7 +9,9 @@ const serverlessConfiguration: AWS = {
     tables: {
       productTable: 'product-table',
       productDetailsTable: 'product-details-table',
-      reviewsTable: 'reviews-table'
+      reviewsTable: 'reviews-table',
+      cartTable: 'cart-table',
+      wishlistTable: 'wishlist-table'
     },
     esbuild: {
       bundle: true,
@@ -54,6 +56,8 @@ const serverlessConfiguration: AWS = {
             'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.productTable}',
             'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.productDetailsTable}',
             'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.reviewsTable}',
+            'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.cartTable}',
+            'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.wishlistTable}',
             'arn:aws:s3:::rejuvenatebucket2022',
           ],
         }],
