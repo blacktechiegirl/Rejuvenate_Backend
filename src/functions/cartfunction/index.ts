@@ -19,7 +19,7 @@ export const createCartItem = {
         {
             http: {
                 method: 'post',
-                path: 'cart/add',
+                path: 'cart',
             },
         },
     ],
@@ -31,7 +31,7 @@ export const deleteCartItem = {
         {
             http: {
                 method: 'delete',
-                path: 'cart/delete/{productId}',
+                path: 'cart/{productId}',
             },
         },
     ],
