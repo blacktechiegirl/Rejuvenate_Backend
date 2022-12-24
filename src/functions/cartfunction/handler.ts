@@ -13,7 +13,7 @@ export const getAllCartItems = middyfy(
       products.map((item) => {
         cart.map((newcartitem) => {
           if (newcartitem.productId === item.productId) {
-            cartitems.push(item)
+            cartitems.push({...newcartitem,item})
           }
         });
       });
