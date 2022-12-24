@@ -9,15 +9,12 @@ export const getAllCartItems = middyfy(
       const userId = event.pathParameters.userId;
       const cart = await cartservice.getAllCartItems(userId);
       const products = await productservice.getAllProducts();
-
-      const cartitems = products.map((item) => {
+      let cartitems =[]
+      products.map((item) => {
         cart.map((newcartitem) => {
           if (newcartitem.productId === item.productId) {
-            return item
-          }else{
-            null
+            cartitems.push(item)
           }
-
         });
       });
 
