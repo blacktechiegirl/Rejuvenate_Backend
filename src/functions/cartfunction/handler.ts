@@ -13,8 +13,11 @@ export const getAllCartItems = middyfy(
       const cartitems = products.map((item) => {
         cart.map((newcartitem) => {
           if (newcartitem.productId === item.productId) {
-            return item;
+            return item
+          }else{
+            null
           }
+
         });
       });
 
