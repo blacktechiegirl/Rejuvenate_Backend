@@ -131,11 +131,11 @@ const serverlessConfiguration: AWS = {
         Properties: {
           TableName: "cart-table",
           AttributeDefinitions: [{
-            AttributeName: "userId",
+            AttributeName: "cartId",
             AttributeType: "S",
           }],
           KeySchema: [{
-            AttributeName: "userId",
+            AttributeName: "cartId",
             KeyType: "HASH"
           }],
           ProvisionedThroughput: {

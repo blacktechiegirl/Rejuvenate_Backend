@@ -2,6 +2,8 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
 import { cartservice, productservice } from "src/service";
+import { v4 } from "uuid";
+
 
 export const getAllCartItems = middyfy(
   async (event): Promise<APIGatewayProxyResult> => {
@@ -55,8 +57,11 @@ export const createProduct = middyfy(
         productId: string;
         quantity: number;
       } = event.body;
+      
+      const cartId = v4();
 
       const newproduct = await cartservice.createProduct({
+        cartId: cartId,
         productId: body.productId,
         userId: body.userId,
         quantity: body.quantity,
