@@ -129,7 +129,7 @@ const serverlessConfiguration: AWS = {
       CartTable: {
         Type: "AWS::DynamoDB::Table",
         Properties: {
-          TableName: "cart-table",
+          TableName: "cart-items-table",
           AttributeDefinitions: [{
             AttributeName: "cartId",
             AttributeType: "S",
