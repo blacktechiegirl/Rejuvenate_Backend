@@ -3,7 +3,7 @@ import { Cart } from "src/model/Cart";
 
 
 export default class CartService {
-  private Tablename: string = "cart-table";
+  private Tablename: string = "cart-items-table";
 
   constructor(private docDB: DocumentClient) {}
 

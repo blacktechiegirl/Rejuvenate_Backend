@@ -11,6 +11,7 @@ const serverlessConfiguration: AWS = {
       productDetailsTable: 'product-details-table',
       reviewsTable: 'reviews-table',
       cartTable: 'cart-table',
+      cartItemsTable: 'cart-items-table',
       wishlistTable: 'wishlist-table'
     },
     esbuild: {
@@ -57,6 +58,7 @@ const serverlessConfiguration: AWS = {
             'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.productDetailsTable}',
             'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.reviewsTable}',
             'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.cartTable}',
+            'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.cartItemsTable}',
             'arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.tables.wishlistTable}',
             'arn:aws:s3:::rejuvenatebucket2022',
           ],
