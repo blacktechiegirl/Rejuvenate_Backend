@@ -1,15 +1,25 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
-import { cartservice } from "src/service";
+import { cartservice, productservice } from "src/service";
 
 export const getAllCartItems = middyfy(
   async (event): Promise<APIGatewayProxyResult> => {
     try {
       const userId = event.pathParameters.userId;
-      const products = await cartservice.getAllCartItems(userId);
+      const cart = await cartservice.getAllCartItems(userId);
+      const products = await productservice.getAllProducts();
+
+      const cartitems = products.map((item) => {
+        cart.map((newcartitem) => {
+          if (newcartitem.productId === item.productId) {
+            return item;
+          }
+        });
+      });
+
       return formatJSONResponse({
-        products,
+        cartitems,
       });
     } catch (e) {
       return formatJSONResponse({
@@ -52,7 +62,6 @@ export const createProduct = middyfy(
         quantity: body.quantity,
         createdAt: new Date().getTime(),
       });
-
 
       return formatJSONResponse({
         newproduct,
