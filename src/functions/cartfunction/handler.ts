@@ -51,6 +51,14 @@ export const deleteCartItem = middyfy(
 
 export const createCartItems = corsmiddyfy(
   async (event): Promise<APIGatewayProxyResult> => {
+    const response = { 
+      statusCode: 200,
+      headers: {
+          "Access-Control-Allow-Headers" : "Content-Type",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*"
+      },
+   };
     try {
       const body: {
         userId: string;
@@ -69,6 +77,7 @@ export const createCartItems = corsmiddyfy(
       });
 
       return formatJSONResponse({
+        response,
         newproduct,
       });
     } catch (e) {
