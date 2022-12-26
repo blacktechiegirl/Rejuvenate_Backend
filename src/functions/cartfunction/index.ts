@@ -47,7 +47,7 @@ export const updateQuantity = {
     events: [
         {
             http: {
-                method: 'update',
+                method: 'put',
                 path: 'cart',
                 cors: true
 
