@@ -7,7 +7,7 @@ export const getAllCartItems = {
         {
             http: {
                 method: 'get',
-                path: 'cart/{userId}',
+                path: 'cart/items/{userId}',
             },
         },
     ],
