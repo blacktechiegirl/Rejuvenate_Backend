@@ -51,7 +51,7 @@ export default class CartService {
       Key: {
         cartId: cartId,
       },
-      ConditionExpression: 'attribute_exists(quatity)',
+      ConditionExpression: 'attribute_exists(quantity)',
       UpdateExpression: "SET #attrName = :attrValue",
       ExpressionAttributeNames: {
         "#attrName":  "quantity"
