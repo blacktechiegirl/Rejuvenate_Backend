@@ -42,3 +42,17 @@ export const deleteCartItem = {
     ],
 };
 
+export const updateQuantity = {
+    handler: `${handlerPath(__dirname)}/handler.updateQuantity`,
+    events: [
+        {
+            http: {
+                method: 'update',
+                path: 'cart',
+                cors: true
+
+            },
+        },
+    ],
+};
+

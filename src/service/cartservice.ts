@@ -1,5 +1,6 @@
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { Cart } from "src/model/Cart";
+import { createBrotliDecompress } from "zlib";
 
 
 export default class CartService {
@@ -42,6 +43,23 @@ export default class CartService {
         },      })
       .promise();
 
+  }
+
+  async changeQuantity(cartId: String, newQuantity: Number){
+    await this.docDB.update({
+      TableName: this.Tablename,
+      Key: {
+        cartId: cartId,
+      },
+      ConditionExpression: 'attribute_exists(quatity)',
+      UpdateExpression: "SET #attrName = :attrValue",
+      ExpressionAttributeNames: {
+        "#attrName":  "quantity"
+      },
+      ExpressionAttributeValues: {":attrValue":  newQuantity},
+      ReturnValues: "ALL_NEW",
+    
+    }).promise();
   }
 
 }

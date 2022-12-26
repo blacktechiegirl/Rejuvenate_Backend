@@ -4,18 +4,17 @@ import { middyfy, corsmiddyfy } from "@libs/lambda";
 import { cartservice, productservice } from "src/service";
 import { v4 } from "uuid";
 
-
 export const getAllCartItems = middyfy(
   async (event): Promise<APIGatewayProxyResult> => {
     try {
       const userId = event.pathParameters.userId;
       const cart = await cartservice.getAllCartItems(userId);
       const products = await productservice.getAllProducts();
-      let cartitems =[]
+      let cartitems = [];
       products.map((item) => {
         cart.map((newcartitem) => {
           if (newcartitem.productId === item.productId) {
-            cartitems.push({...item, ...newcartitem})
+            cartitems.push({ ...item, ...newcartitem });
           }
         });
       });
@@ -57,7 +56,7 @@ export const createCartItems = corsmiddyfy(
         productId: string;
         quantity: number;
       } = event.body;
-      
+
       const cartId = v4();
 
       const newproduct = await cartservice.createProduct({
@@ -70,6 +69,27 @@ export const createCartItems = corsmiddyfy(
 
       return formatJSONResponse({
         newproduct,
+      });
+    } catch (e) {
+      return formatJSONResponse({
+        status: 500,
+        message: e,
+      });
+    }
+  }
+);
+
+export const updateQuantity = middyfy(
+  async (event): Promise<APIGatewayProxyResult> => {
+    try {
+      const body: {
+        cartId: string;
+        newQuantity: number;
+      } = event.body;
+      const product = await cartservice.changeQuantity(body.cartId, body.newQuantity);
+      return formatJSONResponse({
+        message: 'Product updated successfully',
+        product,
       });
     } catch (e) {
       return formatJSONResponse({

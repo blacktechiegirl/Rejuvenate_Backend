@@ -1,5 +1,5 @@
 import type { AWS } from '@serverless/typescript';
-import {createProduct, getAllProducts, getProductByCategory, getProductById , generateUploadURL, getAllCartItems, createCartItem, deleteCartItem,getAllWishlistItems, createWishlistItem, deleteWishlistItem } from '@functions/index';
+import {createProduct, getAllProducts, getProductByCategory, getProductById , generateUploadURL, getAllCartItems, createCartItem,updateQuantity, deleteCartItem,getAllWishlistItems, createWishlistItem, deleteWishlistItem } from '@functions/index';
 
 const serverlessConfiguration: AWS = {
   service: 'rejuvenate-backend',
@@ -67,7 +67,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: {createProduct, getAllProducts, getProductByCategory, getProductById , generateUploadURL,getAllCartItems, createCartItem, deleteCartItem,getAllWishlistItems, createWishlistItem, deleteWishlistItem  },
+  functions: {createProduct, getAllProducts,updateQuantity, getProductByCategory, getProductById , generateUploadURL,getAllCartItems, createCartItem, deleteCartItem,getAllWishlistItems, createWishlistItem, deleteWishlistItem  },
   package: { individually: true },
   resources: {
     Resources: {
