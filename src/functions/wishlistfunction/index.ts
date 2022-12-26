@@ -20,6 +20,7 @@ export const createWishlistItem = {
             http: {
                 method: 'post',
                 path: 'wishlist/add',
+                cors: true
             },
         },
     ],
