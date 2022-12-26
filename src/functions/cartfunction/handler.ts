@@ -49,7 +49,7 @@ export const deleteCartItem = middyfy(
   }
 );
 
-export const createCartItems = corsmiddyfy(
+export const createCartItems = middyfy(
   async (event): Promise<APIGatewayProxyResult> => {
     const response = { 
       statusCode: 200,
