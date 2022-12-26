@@ -20,6 +20,7 @@ export const createCartItem = {
             http: {
                 method: 'post',
                 path: 'cart',
+                cors: true
             },
         },
     ],
