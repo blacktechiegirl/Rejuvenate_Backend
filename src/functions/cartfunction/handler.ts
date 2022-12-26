@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { formatJSONResponse } from "@libs/api-gateway";
-import { middyfy, validmiddyfy } from "@libs/lambda";
+import { middyfy, corsmiddyfy } from "@libs/lambda";
 import { cartservice, productservice } from "src/service";
 import { v4 } from "uuid";
 
@@ -49,7 +49,7 @@ export const deleteCartItem = middyfy(
   }
 );
 
-export const createCartItem = validmiddyfy(
+export const createCartItems = corsmiddyfy(
   async (event): Promise<APIGatewayProxyResult> => {
     try {
       const body: {
