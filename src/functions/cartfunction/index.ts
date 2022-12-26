@@ -8,6 +8,8 @@ export const getAllCartItems = {
             http: {
                 method: 'get',
                 path: 'cart/items/{userId}',
+                cors: true
+
             },
         },
     ],
@@ -33,6 +35,8 @@ export const deleteCartItem = {
             http: {
                 method: 'delete',
                 path: 'cart/{productId}',
+                cors: true
+
             },
         },
     ],
