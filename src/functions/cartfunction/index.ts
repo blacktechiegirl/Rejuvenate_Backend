@@ -14,7 +14,7 @@ export const getAllCartItems = {
 };
 
 export const createCartItem = {
-    handler: `${handlerPath(__dirname)}/handler.createProduct`,
+    handler: `${handlerPath(__dirname)}/handler.createCartItem`,
     events: [
         {
             http: {

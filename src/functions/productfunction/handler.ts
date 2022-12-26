@@ -64,6 +64,8 @@ export const createProduct = validmiddyfy(
         quantity: number;
         imageURL: string;
         ratings: number;
+        description: string;
+        benefits: string;
       } = event.body;
 
       const productId = v4();
