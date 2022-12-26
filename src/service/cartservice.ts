@@ -33,12 +33,12 @@ export default class CartService {
     return newproduct as Cart;
   }
 
-  async deleteProduct(productId: String) {
+  async deleteProduct(cartId: String) {
     await this.docDB
       .delete({
         TableName: this.Tablename,
         Key: {
-          productId: productId,
+          cartId: cartId,
         },      })
       .promise();
 
