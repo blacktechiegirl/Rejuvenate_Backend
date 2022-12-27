@@ -2,7 +2,6 @@ import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { Cart } from "src/model/Cart";
 import { createBrotliDecompress } from "zlib";
 
-
 export default class CartService {
   private Tablename: string = "cart-items-table";
 
@@ -15,13 +14,9 @@ export default class CartService {
       })
       .promise();
 
-      const newdata = products.Items.filter((item) =>
-      item.userId === userId
-    );
+    const newdata = products.Items.filter((item) => item.userId === userId);
     return newdata as Cart[];
-
   }
-
 
   async createProduct(newproduct: Cart): Promise<Cart> {
     await this.docDB
@@ -35,31 +30,32 @@ export default class CartService {
   }
 
   async deleteProduct(cartId: String) {
-    await this.docDB
+    const deletedProduct = await this.docDB
       .delete({
         TableName: this.Tablename,
         Key: {
           cartId: cartId,
-        },      })
+        },
+      })
       .promise();
-
+    return deletedProduct;
   }
 
-  async changeQuantity(cartId: String, newQuantity: Number){
-    await this.docDB.update({
-      TableName: this.Tablename,
-      Key: {
-        cartId: cartId,
-      },
-      ConditionExpression: 'attribute_exists(quantity)',
-      UpdateExpression: "SET #attrName = :attrValue",
-      ExpressionAttributeNames: {
-        "#attrName":  "quantity"
-      },
-      ExpressionAttributeValues: {":attrValue":  newQuantity},
-      ReturnValues: "ALL_NEW",
-    
-    }).promise();
+  async changeQuantity(cartId: String, newQuantity: Number) {
+    await this.docDB
+      .update({
+        TableName: this.Tablename,
+        Key: {
+          cartId: cartId,
+        },
+        ConditionExpression: "attribute_exists(quantity)",
+        UpdateExpression: "SET #attrName = :attrValue",
+        ExpressionAttributeNames: {
+          "#attrName": "quantity",
+        },
+        ExpressionAttributeValues: { ":attrValue": newQuantity },
+        ReturnValues: "ALL_NEW",
+      })
+      .promise();
   }
-
 }
