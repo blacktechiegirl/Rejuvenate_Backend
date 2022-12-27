@@ -131,24 +131,25 @@ export const relatedItems = middyfy(
           if (newcartitem.productId !== item.productId) {
             otheritems.push({ ...newcartitem, ...item });
           } else {
-            newcartitem.category.map((cat)=>{
+            newcartitem.category.map((cat) => {
               if (!category.includes(cat)) {
                 category.push(cat);
               }
-            })
-            
+            });
           }
         });
       });
 
-      const newdata = otheritems.filter((item) =>
-      item.category.includes(category)
-    );
+      let newdata = [];
+      otheritems.map((item) => {
+        if(item.category.includes(category)){
+          newdata.push(item)
+    }})
 
       return formatJSONResponse({
         otheritems,
         category,
-        newdata
+        newdata,
       });
     } catch (e) {
       return formatJSONResponse({
