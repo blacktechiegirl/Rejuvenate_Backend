@@ -38,6 +38,7 @@ export const deleteCartItem = middyfy(
       const product = await cartservice.deleteProduct(productId);
       return formatJSONResponse({
         product,
+        message: 'item deleted from cart'
       });
     } catch (e) {
       return formatJSONResponse({
