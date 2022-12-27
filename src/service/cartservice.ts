@@ -1,6 +1,5 @@
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { Cart } from "src/model/Cart";
-import { createBrotliDecompress } from "zlib";
 
 export default class CartService {
   private Tablename: string = "cart-items-table";
@@ -38,7 +37,7 @@ export default class CartService {
         },
       })
       .promise();
-    return deletedProduct;
+    return cartId;
   }
 
   async changeQuantity(cartId: String, newQuantity: Number) {

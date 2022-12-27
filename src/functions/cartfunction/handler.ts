@@ -35,9 +35,9 @@ export const deleteCartItem = middyfy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const productId = event.pathParameters.productId;
     try {
-      const product = await cartservice.deleteProduct(productId);
+      const cartId = await cartservice.deleteProduct(productId);
       return formatJSONResponse({
-        product,
+        cartId,
         message: 'item deleted from cart'
       });
     } catch (e) {
