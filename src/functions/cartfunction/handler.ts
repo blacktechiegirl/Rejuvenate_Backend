@@ -126,12 +126,12 @@ export const relatedItems = middyfy(
       let otheritems = [];
       let category = [];
 
-      products.map((item) => {
-        cart.map((newcartitem) => {
+      cart.map((item) => {
+        products.map((newcartitem) => {
           if (newcartitem.productId !== item.productId) {
-            otheritems.push({ ...item, ...newcartitem });
+            otheritems.push({ ...newcartitem, ...item });
           } else {
-            item.category.map((cat)=>{
+            newcartitem.category.map((cat)=>{
               if (!category.includes(cat)) {
                 category.push(cat);
               }
