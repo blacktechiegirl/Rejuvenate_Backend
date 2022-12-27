@@ -146,7 +146,9 @@ export const relatedItems = middyfy(
     );
 
       return formatJSONResponse({
-        newdata,
+        otheritems,
+        category,
+        newdata
       });
     } catch (e) {
       return formatJSONResponse({
