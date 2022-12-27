@@ -3,6 +3,7 @@ import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy, corsmiddyfy } from "@libs/lambda";
 import { cartservice, productservice } from "src/service";
 import { v4 } from "uuid";
+import { getProductByCategory } from "..";
 
 export const getAllCartItems = middyfy(
   async (event): Promise<APIGatewayProxyResult> => {
@@ -26,13 +27,13 @@ export const getAllCartItems = middyfy(
       });
 
       cartitems.map((item) => {
-        totalCost = totalCost + (item.price * item.quantity);
+        totalCost = totalCost + item.price * item.quantity;
       });
 
       return formatJSONResponse({
         cartitems,
         totalQuantity,
-        totalCost
+        totalCost,
       });
     } catch (e) {
       return formatJSONResponse({
@@ -106,6 +107,46 @@ export const updateQuantity = middyfy(
       return formatJSONResponse({
         message: "Product updated successfully",
         product,
+      });
+    } catch (e) {
+      return formatJSONResponse({
+        status: 500,
+        message: e,
+      });
+    }
+  }
+);
+
+export const relatedItems = middyfy(
+  async (event): Promise<APIGatewayProxyResult> => {
+    try {
+      const userId = event.pathParameters.userId;
+      const cart = await cartservice.getAllCartItems(userId);
+      const products = await productservice.getAllProducts();
+      let otheritems = [];
+      let category = [];
+
+      products.map((item) => {
+        cart.map((newcartitem) => {
+          if (newcartitem.productId !== item.productId) {
+            otheritems.push({ ...item, ...newcartitem });
+          } else {
+            item.category.map((cat)=>{
+              if (!category.includes(cat)) {
+                category.push(cat);
+              }
+            })
+            
+          }
+        });
+      });
+
+      const newdata = otheritems.filter((item) =>
+      item.category.includes(category)
+    );
+
+      return formatJSONResponse({
+        newdata,
       });
     } catch (e) {
       return formatJSONResponse({

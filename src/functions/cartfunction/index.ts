@@ -56,3 +56,17 @@ export const updateQuantity = {
     ],
 };
 
+export const getRelatedItems = {
+    handler: `${handlerPath(__dirname)}/handler.relatedItems`,
+    name: 'getRelatedItems',
+    events: [
+        {
+            http: {
+                method: 'get',
+                path: 'related/items/{userId}',
+                cors: true
+
+            },
+        },
+    ],
+};
