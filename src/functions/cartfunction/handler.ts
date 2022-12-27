@@ -19,14 +19,20 @@ export const getAllCartItems = middyfy(
         });
       });
 
-      let totalQuantity = 0
-      cartitems.map((newitem)=> {
-        totalQuantity = totalQuantity + newitem.quantity
-      })
+      let totalQuantity = 0;
+      let totalCost = 0;
+      cartitems.map((newitem) => {
+        totalQuantity = totalQuantity + newitem.quantity;
+      });
+
+      cartitems.map((item) => {
+        totalCost = totalCost + (item.price * item.quantity);
+      });
 
       return formatJSONResponse({
         cartitems,
-        totalQuantity
+        totalQuantity,
+        totalCost
       });
     } catch (e) {
       return formatJSONResponse({
@@ -44,7 +50,7 @@ export const deleteCartItem = middyfy(
       const cartId = await cartservice.deleteProduct(productId);
       return formatJSONResponse({
         cartId,
-        message: 'item deleted from cart'
+        message: "item deleted from cart",
       });
     } catch (e) {
       return formatJSONResponse({
@@ -93,9 +99,12 @@ export const updateQuantity = middyfy(
         cartId: string;
         newQuantity: number;
       } = event.body;
-      const product = await cartservice.changeQuantity(body.cartId, body.newQuantity);
+      const product = await cartservice.changeQuantity(
+        body.cartId,
+        body.newQuantity
+      );
       return formatJSONResponse({
-        message: 'Product updated successfully',
+        message: "Product updated successfully",
         product,
       });
     } catch (e) {
