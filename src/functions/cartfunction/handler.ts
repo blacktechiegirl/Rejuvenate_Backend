@@ -19,8 +19,14 @@ export const getAllCartItems = middyfy(
         });
       });
 
+      let totalQuantity = 0
+      cartitems.map((newitem)=> {
+        totalQuantity = totalQuantity + newitem.quantity
+      })
+
       return formatJSONResponse({
         cartitems,
+        totalQuantity
       });
     } catch (e) {
       return formatJSONResponse({
